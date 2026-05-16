@@ -10,6 +10,4 @@ EXPOSE 6080
 RUN apt-get update && apt-get install -y wget && \
     wget -O /root/myapp.apk https://apk.e-droid.net/apk/app4036165-vkb9oi.apk?v=1
 
-CMD socat TCP-LISTEN:6080,fork TCP:127.0.0.1:6080 & \
-    /bin/bash -c "sleep 15 && adb install /root/myapp.apk" & \
-    /home/androiduser/starter.sh
+CMD ["/bin/bash", "-c", "socat TCP-LISTEN:6080,fork TCP:127.0.0.1:6080 & sleep 15 && adb install /root/myapp.apk & /home/androiduser/starter.sh"]
